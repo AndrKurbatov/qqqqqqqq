@@ -1,0 +1,151 @@
+body {
+    background: #ECE9E6; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #5d5d5cc7); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #5d5d5cc7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+
+.sidebar__contacts-label {
+    padding: 10px 0;
+    display: block;
+    height: 54px;
+}
+
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.container-fluid {
+    max-width: 1200px;
+}
+
+.sidebar__contacts-list {
+    height: calc(100% - 59px);
+    overflow: auto;
+    margin-bottom: 0;
+    padding: 1px 0;
+}
+
+.sidebar {
+    height: calc(100vh - 158px);
+    transition: all 0.6ms ease-in-out;
+}
+
+.addEmail {
+    position: absolute;
+    right: 9px;
+    bottom: 5px;
+    width: 25px;
+    border: 0;
+    height: 25px;
+    background: url(../images/plus.svg) no-repeat;
+    color: green;
+}
+
+.sidebar__logo {
+    font-size: 120px;
+}
+.back-button {
+    margin-right: 5px;
+}
+
+.sidebar__contacts-wrapper {
+    height: 100%;
+    padding-bottom: 15px;
+}
+
+.main-container {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+
+.btn > .glyphicon {
+    padding-left: 4px;
+}
+
+#btnSave {
+    display: none;
+}
+
+.modal.in {
+    display: block;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.edit-container {
+    transform: translateX(100%);
+    transition: transform 300ms ease-in-out;
+}
+
+.edit-container--showed {
+    transform: translateX(0);
+}
+
+.empty-contacts-list {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.alert {
+    position: absolute;
+    width: 100%;
+    border: 0;
+    padding: 0 15px;
+}
+
+.remove-additional-field {
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    border: 0;
+    font-size: 24px;
+    right: 15px;
+    background: #fff;
+    top: 30px;
+}
+
+.notification {
+    position: absolute;
+    z-index: 11111;
+    right: 15px;
+    top: 15px;
+    width: 20vw;
+    padding: 20px;
+    border-radius: 8px;
+    animation: notification 2s ease-in-out;
+}
+
+.notification.success {
+    background: #8fd88f;
+}
+
+.notification.danger {
+    background: #d85b4d;
+}
+
+@keyframes notification {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.edit-container--edit-mode input[type="submit"],
+.edit-container--edit-mode button.remove-additional-field {
+    display: none;
+}
