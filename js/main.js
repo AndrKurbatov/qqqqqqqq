@@ -60,7 +60,7 @@
     const btnCreateContact = doc.getElementById('btn-create');
     const modal = doc.getElementById('createModal');
     const body = doc.getElementsByTagName('body')[0];
-    const closeModal = doc.querySelector('button.close');
+    const closeModalbtn = doc.querySelector('button.close');
     const btnDismiss = doc.querySelector('#btn-dismiss');
     const btnCreate = doc.querySelector('#btn-save-contact');
     const additionalEmail = doc.getElementById('addEmail');
@@ -112,7 +112,7 @@
                             emailContainer.insertAdjacentHTML('beforeend', `<div class="form-group">
                                                                             <label>Additional email address</label>
                                                                             <input disabled type="email" value="${item}" class="form-control view-emails-input form-control-values">
-                                                                            <button type="button" class="fas fa-minus remove-additional-field additional-view-button"></button>
+                                                                            <button type="button" class="fas fa-minus-circle remove-additional-field additional-view-button"></button>
                                                                             <div class="alert alert-danger" role="alert"></div>
                                                                         </div>`)
                         });
@@ -125,7 +125,7 @@
                             phoneContainer.insertAdjacentHTML('beforeend', `<div class="form-group">
                                                                             <label >Additional phone number</label>
                                                                             <input disabled type="tel" value="${item}" class="form-control view-phones-input form-control-values">
-                                                                            <button type="button" class="fas fa-minus remove-additional-field additional-view-button"></button>
+                                                                            <button type="button" class="fas fa-minus-circle remove-additional-field additional-view-button"></button>
                                                                             <div class="alert alert-danger" role="alert"></div>
                                                                         </div>`)
                         });
@@ -139,10 +139,10 @@
         }
     });
 
-    backBtn.addEventListener('click', hideSidebar);
+    backBtn.addEventListener('click', showSidebar);
 
-    function hideSidebar() {
-        sideBar.style.display = 'block';
+    function showSidebar() {
+        setTimeout(() => sideBar.style.display = 'block', 500);
         hideEditContainer();
     }
 
@@ -154,7 +154,7 @@
         const additionalEmailMockUp = `<div class="form-group popup-emails">
                                             <label for="popup-email">Additional Email</label>
                                             <input type="email" class="form-control popup-emails-input" id="popup-email${emailsCount++}">
-                                            <button type="button" class="fas fa-minus remove-additional-field"></button>
+                                            <button type="button" class="fas fa-minus-circle remove-additional-field"></button>
                                             <div class="alert alert-danger" role="alert"></div>
                                         </div>`;
         lastEmail.insertAdjacentHTML('afterend', additionalEmailMockUp);
@@ -169,7 +169,7 @@
         const additionalPhoneMockUp = `<div class="form-group popup-phones">
                                             <label for="popup-email">Additional Number</label>
                                             <input type="tel" class="form-control popup-phones-input" id="popup-email${phonesCount++}">
-                                            <button type="button" class="fas fa-minus remove-additional-field"></button>
+                                            <button type="button" class="fas fa-minus-circle remove-additional-field"></button>
                                             <div class="alert alert-danger" role="alert"></div>
                                         </div>`;
         lastPhone.insertAdjacentHTML('afterend', additionalPhoneMockUp);
@@ -286,17 +286,17 @@
     // ==============================
 
     btnCreateContact.addEventListener('click', () => {
-        body.classList.add("modal-open");
+        // body.classList.add("modal-open");
+        sideBar.style.display = 'none';
+        hideEditContainer();
         modal.classList.add("in");
     });
 
-    function closeModalModel() {
+    function closeModal() {
         const additionalEmails = doc.querySelectorAll('.popup-emails-input');
         const length = additionalEmails.length;
         const additionalPhones = doc.querySelectorAll('.popup-phones-input');
         const phonesLength = additionalPhones.length;
-        body.classList.remove("modal-open");
-        modal.classList.remove("in");
         for (let i = 0; i < length; i++) {
             if (!additionalEmails[i].value) {
                 additionalEmails[i].parentNode.remove();
@@ -307,10 +307,12 @@
                 additionalPhones[i].parentNode.remove();
             }
         }
+        showSidebar();
+        modal.classList.remove("in");
     }
 
-    closeModal.addEventListener('click', closeModalModel);
-    btnDismiss.addEventListener('click', closeModalModel);
+    closeModalbtn.addEventListener('click', closeModal);
+    btnDismiss.addEventListener('click', closeModal);
 
     btnCreate.addEventListener('click', () => {
         let inputs = {
@@ -331,8 +333,9 @@
             id: new Date().getTime()
         };
         if (inputsValidation(popupErrors)) {
-            closeModalModel();
+            closeModal();
             updateContacts(contact, 'add');
+            showSidebar();
             cleanupInputs(inputs);
         } else {
             showNotification('danger', `Please fill all fields.`);
@@ -532,7 +535,7 @@
         const addViewNumber = `<div class="form-group popup-phones">
                                             <label class='additional-number' for="popup-email">Additional phone number</label>
                                             <input type="tel" class="form-control popup-phones-input add-additional-view-numbers" id="popup-email${phonesCount++}">
-                                            <button type="button" class="glyphicon glyphicon-remove-circle remove-additional-field additional-view-button"></button>
+                                            <button type="button" class="fas fa-minus-circle remove-additional-field additional-view-button"></button>
                                             <div class="alert alert-danger" role="alert"></div>
                                         </div>`;
         phoneContainer.insertAdjacentHTML('beforeend', addViewNumber);
@@ -544,7 +547,7 @@
         const addViewEmail = `<div class="form-group popup-emails">
                                             <label for="popup-email">Additional email address</label>
                                             <input type="email" class="form-control popup-emails-input add-additional-view-emails" id="popup-email${emailsCount++}">
-                                            <button type="button" class="glyphicon glyphicon-remove-circle remove-additional-field additional-view-button"></button>
+                                            <button type="button" class="fas fa-minus-circle remove-additional-field additional-view-button"></button>
                                             <div class="alert alert-danger" role="alert"></div>
                                         </div>`;
         emailContainer.insertAdjacentHTML('beforeend', addViewEmail);
