@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
     <link rel="stylesheet" href="css/app.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="css/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -38,7 +40,9 @@
                     <div id="edit-container" class="row edit-container edit-container--edit-mode">
                         <div class="col-xs-12">
                             <div class="btn-toolbar">
-                                <button type="button" id="delete-contact" class="btn btn-danger pull-right">Delete
+                                <button type="button"  class="btn btn-danger pull-right"
+                                        data-toggle="modal"
+                                        data-target="#modalDelete">Delete
                                     <span aria-hidden="true">
                                 <i class="fas fa-user-times"></i></span>
                                 </button>
@@ -130,6 +134,19 @@
                                         <span class="glyphicon glyphicon-ok"></span>
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                Delete contact?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-target="#modalDelete">No</button>
+                                <button type="button" class="btn btn-danger" id="delete-contact" data-dismiss="modal" data-target="#modalDelete">Yes</button>
                             </div>
                         </div>
                     </div>

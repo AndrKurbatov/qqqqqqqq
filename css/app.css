@@ -141,6 +141,12 @@ body {
     background: #d85b4d;
 }
 
+.modal-backdrop {
+ display: none;
+}
+.modal {
+    top: 310px;
+}
 @keyframes notification {
     from {
         opacity: 0;

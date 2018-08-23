@@ -490,7 +490,7 @@
             case 'delete':
                 allContacts = allContacts.filter((it) => it.id !== contact.id);
                 localStorage.setItem('users', JSON.stringify(allContacts));
-                sideBar.style.display = 'block';
+                setTimeout(() =>sideBar.style.display = 'block', 300);
                 hideEditContainer();
                 showNotification('success', `Contact  <b>${contact.firstName} ${contact.lastName}</b> has been removed`);
                 break;
