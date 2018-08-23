@@ -5,7 +5,11 @@ body {
 
 }
 
-
+div#modalDelete {
+    top: 0;
+    background-color: #00000073;
+    padding-top: 40vh;
+}
 
 .sidebar__contacts-label {
     padding: 10px 0;
