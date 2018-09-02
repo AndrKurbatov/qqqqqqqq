@@ -1,160 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>
+<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-    <link rel="stylesheet" href="css/app.css">
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="css/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="content/css/app.css">
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css"/>
+    <link rel="stylesheet" href="bower_components/md-data-table/dist/md-data-table-style.css"/>
+    <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css"/>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="wrapper">
-            <div class="section">
-                <header class="col-sm-12 header">
-                    <div class="sidebar__logo">
-                        <i class="fas fa-address-book"></i>
-                    </div>
-                    <button id="btn-create" class="btn primary">Create contact
-                        <span aria-hidden="true">
-                    <i class="fas fa-user-plus"></i></span>
-                    </button>
-                </header>
-                <div class="col-xs-12 col-sm-4 sidebar" id="sideBar">
-                    <div class="sidebar__contacts-wrapper">
-                        <label class="sidebar__contacts-label" for="contact-search">
-                            <input class="sidebar__contacts-search form-control" type="search"
-                                   id="contact-search" placeholder="Search">
-                        </label>
 
-                        <ul id="contacts-list" class="sidebar__contacts-list list-group"></ul>
+<div id="page" class="main-container">
 
+    <div ui-view></div>
 
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-8 main-container">
-                    <div id="edit-container" class="row edit-container edit-container--edit-mode">
-                        <div class="col-xs-12">
-                            <div class="btn-toolbar">
-                                <button type="button"  class="btn btn-danger pull-right"
-                                        data-toggle="modal"
-                                        data-target="#modalDelete">Delete
-                                    <span aria-hidden="true">
-                                <i class="fas fa-user-times"></i></span>
-                                </button>
-                                <button type="button" id="btnEdit" class="btn btn-primary pull-right">Edit
-                                    <span aria-hidden="true">
-                                <i class="fas fa-user-edit"></i></span>
-                                </button>
-                                <button type="button" id="btnSave" class="btn btn-success pull-right">Save
-                                    <span><i class="fas fa-check"></i></span>
-                                </button>
-                                <button type="button" id="btnBack" class="btn btn-info pull-right">
-                                    <span><i class="fas fa-arrow-left back-button"></i></span>Back
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="form-group">
-                                <label for="firstName">First name</label>
-                                <input disabled type="text" class="form-control form-control-values" id="firstName">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="form-group">
-                                <label for="lastName">Last name</label>
-                                <input disabled type="text" class="form-control form-control-values" id="lastName">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6" id="additionalPhone">
-                            <div class="form-group">
-                                <label for="phone">Phone number</label>
-                                <input disabled type="tel" class="form-control form-control-values" id="phone">
-                                <input type="submit" value="" id="addViewNumber" class="addEmail">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                            <div id="phone-container"></div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6" id="additionalViewEmail">
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input disabled type="email" class="form-control form-control-values" id="email">
-                                <input type="submit" value="" id="addViewEmail" class="addEmail">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                            <div id="email-container"></div>
-                        </div>
-                    </div>
-                </div>
-                <div id="createModal" class="modal">
-                    <div class="modal-dialog">
-                        <div>
-                            <div class="modal-header">
-                                <button type="button" class="close">&times;</button>
-                                <h4 class="modal-title">Create contact</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="content-firstname" class="form-group">
-                                    <label for="popup-firstName">First name</label>
-                                    <input type="text" class="form-control" id="popup-firstName">
-                                    <div class="alert alert-danger" role="alert"></div>
-                                </div>
-                                <div id="content-lastname" class="form-group">
-                                    <label for="popup-lastName">Last name</label>
-                                    <input type="text" class="form-control" id="popup-lastName">
-                                    <div class="alert alert-danger" role="alert"></div>
-                                </div>
-                                <div id="content-phone" class="form-group popup-phones">
-                                    <label for="popup-phone">Phone number</label>
-                                    <input type="tel" class="form-control" id="popup-phone">
-                                    <input type="submit" value="" id="addNumber" class="addEmail">
-                                    <div class="alert alert-danger" role="alert"></div>
-                                </div>
-                                <div id="content-email" class="form-group popup-emails">
-                                    <label for="popup-email">Email address</label>
-                                    <input type="email" class="form-control" id="popup-email">
-                                    <input type="submit" value="" id="addEmail" class="addEmail">
-                                    <div class="alert alert-danger" role="alert"></div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="btn-toolbar">
-                                    <button id="btn-dismiss" class="btn btn-danger pull-right">Dismiss
-                                        <span aria-hidden="true">
-                            <i class="fas fa-times-circle"></i>
-                        </span>
-                                    </button>
-                                    <button id="btn-save-contact" class="btn btn-success pull-right">Create
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                Delete contact?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-target="#modalDelete">No</button>
-                                <button type="button" class="btn btn-danger" id="delete-contact" data-dismiss="modal" data-target="#modalDelete">Yes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<script src="js/main.js"></script>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
+<script src="bower_components/md-data-table/dist/md-data-table.js"></script>
+<script src="bower_components/md-data-table/dist/md-data-table-templates.js"></script>
+<script src="bower_components/angular-material-icons/angular-material-icons.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
+
+
+<script src="app.js"></script>
+<script src="core/core.module.js"></script>
+<script src="core/core.config.js"></script>
+<script src="core/blocks/directives/directives.module.js"></script>
+<script src="core/blocks/filters/filters.module.js"></script>
+<script src="core/blocks/request/request.module.js"></script>
+<script src="core/blocks/services/services.module.js"></script>
+
+
+<!--services-->
+<script src="services/weather.service.js"></script>
+
+<!--factories-->
+<script src="factories/request.js"></script>
+<script src="factories/url.js"></script>
+
+<!--filters-->
+<script src="filters/example.filter.js"></script>
+
+<!--directives-->
+
+<!--controllers-->
+<script src="templates/homepage/homepage.controller.js"></script>
+
+
 </body>
 </html>
